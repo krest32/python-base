@@ -13,13 +13,11 @@ def print_time(threadName, delay):
         print("%s: %s" % (threadName, time.ctime(time.time())))
 
 if __name__ == '__main__':
-
     # 创建两个线程,分别打印时间
     try:
         _thread.start_new_thread(print_time, ("Thread-1", 2,))
         _thread.start_new_thread(print_time, ("Thread-2", 4,))
     except:
         print("Error: 无法启动线程")
-
     while 1:
         pass
