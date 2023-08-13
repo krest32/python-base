@@ -15,7 +15,6 @@ headers = {
 
 
 def getData(start, count):
-    time.sleep(3)
     # 伪装浏览器请求
     params = {
         "from_web": 1,
@@ -34,7 +33,6 @@ def getData(start, count):
 
 
 def getNote(noteId):
-    time.sleep(1)
     url = f"https://www.douban.com/j/note/{noteId}/full"
     resp = requests.get(url, headers=headers)
     if resp.status_code != 200:
@@ -46,9 +44,9 @@ def getNote(noteId):
 
 
 if __name__ == '__main__':
-    total = 20
+    total = 2000
     step = 20
-    start = 0
+    start = 1000
     end = start + step
     dataList = []
     listHeader = ["序号", "用户编号", "网页地址", "城市", "介绍", "头像", "附件照片数量"]
@@ -73,8 +71,7 @@ if __name__ == '__main__':
                 authorId = list[i]["target"]["status"]["author"]["id"]
                 shardingUrl = list[i]["target"]["status"]["sharing_url"]
                 if "loc" in list[i]["target"]["status"]["author"]:
-                    if list[i]["target"]["status"]["author"]["loc"] is not None and "name" in \
-                            list[i]["target"]["status"]["author"]["loc"]:
+                    if list[i]["target"]["status"]["author"]["loc"] is not None and "name" in list[i]["target"]["status"]["author"]["loc"]:
                         city = list[i]["target"]["status"]["author"]["loc"]["name"]
                 # 可能存在没有照片的情况
                 imgs = list[i]["target"]["status"]["images"]
@@ -93,9 +90,11 @@ if __name__ == '__main__':
                 avatar = list[i]["target"]["author"]["avatar"]
                 shardingUrl = list[i]["target"]["sharing_url"]
                 authorId = list[i]["target"]["author"]["id"]
-                city = list[i]["target"]["author"]["loc"]["name"]
+                if list[i]["target"]["author"]["loc"] is not None :
+                    city = list[i]["target"]["author"]["loc"]["name"]
+
             # 获取头像
-            tempList = [start + i, authorId, city, text.encode('UTF-8', 'ignore').decode('UTF-8'), avatar, imgCount]
+            tempList = [start + i, authorId, shardingUrl, city, text.encode('UTF-8', 'ignore').decode('UTF-8'), avatar, imgCount]
             if city == "北京":
                 dataList.append(tempList)
                 print(tempList)
