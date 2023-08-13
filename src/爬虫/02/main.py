@@ -9,7 +9,7 @@ if __name__ == '__main__':
     # 解析该html文档，便能获取到一个BeautifulSoup对象。
     soup = BeautifulSoup(resp.content, features='html.parser')
     # 格式化html输出
-    # print(soup.prettify())
+    print(soup.prettify())
 
     # 获取所有 class='entry-title' 的h2标签
     tags = soup.find_all('h2', class_='entry-title')

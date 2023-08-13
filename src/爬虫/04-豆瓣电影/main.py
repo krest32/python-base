@@ -13,6 +13,10 @@ def askUrl(url):
     }
 
     resp = requests.get(url, headers=head)
+    if resp.status_code != 200:
+        print("请求错误")
+        print(resp.content)
+        return None
     soup = BeautifulSoup(resp.text, 'html.parser')
     # 获取页面中的内容
     # print(soup.prettify())
@@ -50,9 +54,6 @@ if __name__ == '__main__':
     # 获取网页地址
 
     # 伪装浏览器请求
-    head = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36"
-    }
     resp = requests.get(url, headers=head)
     soup = BeautifulSoup(resp.text, 'html.parser')
     elements = soup.select("#content > div > div.article > div.paginator > a")
