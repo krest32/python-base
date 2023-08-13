@@ -8,15 +8,17 @@ def read_file():
             result.append(line.split(","))
     return result
 
+
 def sort_list(datas):
     # 按照列表中的第三个元素进行排序
-    return sorted(datas,key=lambda x: int(x[2]),reverse=True)
+    return sorted(datas, key=lambda x: int(x[2]), reverse=True)
+
 
 def write_file(datas):
     with open("student_grade_output.txt", "w", encoding='utf-8-sig') as fout:
         for data in datas:
             # 将数据写入到文件中，，为分隔符，最后再加上一个换行符
-            fout.write(",".join(data)+"\n")
+            fout.write(",".join(data) + "\n")
     print("文件写出成功")
 
 

@@ -29,7 +29,7 @@ def saveDataList(dataList, savePath):
     print("saving...")
     book = xlwt.Workbook(encoding="utf-8", style_compression=0)
     sheet = book.add_sheet('豆瓣电影Top250', cell_overwrite_ok=True)
-    col = ("电影详情链接", "图片链接", "影片中文名", "外国名", "评分", "评价数", "概况", "相关信息")
+    col = ("电影详情链接", "图片链接", "影片中文名", "外国名", "评分", "评价数", "概况", "相关信息1")
     for i in range(0, 8):
         sheet.write(0, i, col[i])
     for i in range(0, 250):

@@ -1,10 +1,12 @@
 if __name__ == '__main__':
-    str = "www.runoob.com"
+    strTest = "www.runoob.com"
     # 转化大写
-    print(str.upper())
+    print(strTest.upper())
     # 转化小写
-    print(str.lower())
+    print(strTest.lower())
     # 首字母大写
-    print(str.capitalize())
+    print(strTest.capitalize())
     # 每个单词的第一个首字母大写
-    print(str.title())
+    print(strTest.title())
+    num = 1
+    print(str(num))

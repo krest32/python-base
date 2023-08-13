@@ -2,6 +2,7 @@ import json
 import time
 
 import requests
+import xlwt
 from bs4 import BeautifulSoup
 
 # 伪装浏览器请求
@@ -44,13 +45,13 @@ def getNote(noteId):
 
 
 if __name__ == '__main__':
-    total = 2000
+    total = 100
     step = 20
-    start = 1000
+    start = 0
     end = start + step
     dataList = []
     listHeader = ["序号", "用户编号", "网页地址", "城市", "介绍", "头像", "附件照片数量"]
-    dataList.append(listHeader)
+    # dataList.append(listHeader)
     print(listHeader)
     while start < total:
         resp = getData(start, end)
@@ -71,7 +72,8 @@ if __name__ == '__main__':
                 authorId = list[i]["target"]["status"]["author"]["id"]
                 shardingUrl = list[i]["target"]["status"]["sharing_url"]
                 if "loc" in list[i]["target"]["status"]["author"]:
-                    if list[i]["target"]["status"]["author"]["loc"] is not None and "name" in list[i]["target"]["status"]["author"]["loc"]:
+                    if list[i]["target"]["status"]["author"]["loc"] is not None and "name" in \
+                            list[i]["target"]["status"]["author"]["loc"]:
                         city = list[i]["target"]["status"]["author"]["loc"]["name"]
                 # 可能存在没有照片的情况
                 imgs = list[i]["target"]["status"]["images"]
@@ -90,11 +92,12 @@ if __name__ == '__main__':
                 avatar = list[i]["target"]["author"]["avatar"]
                 shardingUrl = list[i]["target"]["sharing_url"]
                 authorId = list[i]["target"]["author"]["id"]
-                if list[i]["target"]["author"]["loc"] is not None :
+                if list[i]["target"]["author"]["loc"] is not None:
                     city = list[i]["target"]["author"]["loc"]["name"]
 
             # 获取头像
-            tempList = [start + i, authorId, shardingUrl, city, text.encode('UTF-8', 'ignore').decode('UTF-8'), avatar, imgCount]
+            tempList = [str(start + i), authorId, shardingUrl, city, text.encode('UTF-8', 'ignore').decode('UTF-8'),
+                        avatar, str(imgCount)]
             if city == "北京":
                 dataList.append(tempList)
                 print(tempList)
@@ -102,3 +105,20 @@ if __name__ == '__main__':
         # 重置查找的范围
         start = end
         end = start + step
+
+    # 使用txt文本进行输出
+    with open('aaa.txt', 'w') as fout:
+        for e in dataList:
+            fout.write(','.join(e) + "\n")
+
+    # 保存數據到 表格
+    book = xlwt.Workbook(encoding='utf-8', style_compression=0)
+    sheet = book.add_sheet("帖子", cell_overwrite_ok=True)
+    for i in range(0, len(listHeader)):
+        sheet.write(0, i, listHeader[i])
+
+    for i in range(0, len(dataList)):
+        data = dataList[i]
+        for j in range(0, len(listHeader)):
+            sheet.write(i + 1, j, data[j])
+    book.save("aaa.xls")
