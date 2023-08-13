@@ -9,3 +9,5 @@ if __name__ == '__main__':
     print(list[2:])  # 输出从第三个元素开始的所有元素
     print(tinylist * 2)  # 输出两次列表
     print(list + tinylist)  # 连接列表
+    list.append("aa")
+    print(list)

@@ -18,4 +18,11 @@ if __name__ == '__main__':
         # 找到 a 标签
         a_tag = tag.find('a')
         # 找到标签的 text，标签中的某个 tag
-        print('Title:[%s], URL:[%s]' % (tag.text, a_tag['href']))
+        subUrl = a_tag['href']
+        print('一级页面：Title:[%s], URL:[%s]' % (tag.text, subUrl))
+
+        # 解析子网页面
+        subResp = requests.get(subUrl)
+        subSoup = BeautifulSoup(subResp.content, features='html.parser')
+        element = subSoup.select_one('#post-464 > header > h1')
+        print('内容：%s' % (element.text))
