@@ -20,7 +20,6 @@ if __name__ == '__main__':
         # 找到标签的 text，标签中的某个 tag
         subUrl = a_tag['href']
         print('一级页面：Title:[%s], URL:[%s]' % (tag.text, subUrl))
-
         # 解析子网页面
         subResp = requests.get(subUrl)
         subSoup = BeautifulSoup(subResp.content, features='html.parser')
