@@ -1,9 +1,13 @@
+import random
+import time
+
 import requests
 import pandas as pd
 
 
 # 爬去对应年份和月份的数据
-def crawTable(year, month):
+def crawTable(year, month, timeSleep):
+    time.sleep(timeSleep)
     # 请求头配置
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36"
@@ -36,10 +40,11 @@ def crawTable(year, month):
 
 if __name__ == '__main__':
     df_list = []
+    timeSleep = random.randint(1, 3)
     for year in range(2011, 2022):
         for month in range(1, 13):
             print("爬取：", year, month)
-            df = crawTable(year, month)
+            df = crawTable(year, month, timeSleep)
             # 数据保存在 df 中
             df_list.append(df)
 
