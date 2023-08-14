@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+#  Python 的元组与列表类似，不同之处在于元组的元素不能修改。
 if __name__ == '__main__':
     tuple = ('abcd', 786, 2.23, 'runoob', 70.2)
     tinytuple = (123, 'runoob')

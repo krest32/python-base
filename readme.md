@@ -1,0 +1,5 @@
++ [菜鸟教程(已完成)](https://www.runoob.com/python3/python3-tutorial.html)
++ [Python官网](https://www.python.org/)
++ [wc3School-py](https://www.w3school.com.cn/python/index.asp)
++ [综合学习网站](https://www.pythontab.com/)
++ [Python 3 标准库实例教程](https://learnku.com/docs/pymotw/introduce/3357)

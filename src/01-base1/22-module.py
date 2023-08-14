@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # 文件名: using_sys.py
-
 import sys
 
 if __name__ == '__main__':

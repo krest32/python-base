@@ -4,6 +4,7 @@ def change(a):
     print(id(a))  # 一个新对象
 
 
-a = 1
-print(id(a))
-change(a)
+if __name__ == '__main__':
+    a = 1
+    print(id(a))
+    change(a)
