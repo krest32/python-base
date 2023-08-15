@@ -3,13 +3,14 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-# chrome drive 下载地址
+# chrome drive 下载地址 https://registry.npmmirror.com/binary.html?path=chromedriver
 if __name__ == '__main__':
     # 实例化浏览器
     driver = webdriver.Chrome()
     # 打开网址
     driver.get('https://www.baidu.com/')
 
+    driver.maximize_window()
     # 需求
     ele = driver.find_element(By.XPATH, '//*[@id="kw"]')
     ele.send_keys('易烊千玺')

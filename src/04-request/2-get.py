@@ -12,6 +12,6 @@ if __name__ == '__main__':
 
     # 响应状态的描述
     print(x.reason)
-
+    print(x.content)
     # 返回编码
     print(x.apparent_encoding)

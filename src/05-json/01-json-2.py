@@ -12,11 +12,14 @@ if __name__ == '__main__':
     }
 
     json_str = json.dumps(data)
+
     # 写入 JSON 数据
-    with open('26-data.json', 'w') as f:
+    with open('01-data.json', 'w') as f:
         json.dump(data, f)
 
     # 读取数据
-    with open('26-data.json', 'r') as f:
+    with open('01-data.json', 'r') as f:
         data2 = json.load(f)
-        print(data2)
+
+    # 打印读取的数据
+    print(data2)

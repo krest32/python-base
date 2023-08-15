@@ -32,7 +32,11 @@ if __name__ == '__main__':
     link = driver.find_element(By.LINK_TEXT, "图片")
     print("目标元素属性值：", link.get_attribute('id'))
 
+    ele = driver.find_element(By.XPATH, '//*[@id="searchform"]/div/div/div[1]/div[2]/input')
+    print(ele.get_attribute("value"))
+
     sleep(3)
+
 
     # 关闭浏览器驱动对象的所有页面
     driver.quit()

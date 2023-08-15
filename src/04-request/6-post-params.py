@@ -6,8 +6,9 @@ import requests
 if __name__ == '__main__':
     # 表单参数，参数名为 fname 和 lname
     my_obj = {'fname': 'RUNOOB', 'lname': 'Boy'}
+    cookies = {"key": "value"}
     # 发送请求
-    x = requests.post('https://www.runoob.com/try/ajax/demo_post2.php', data=my_obj)
+    x = requests.post('https://www.runoob.com/try/ajax/demo_post2.php', data=my_obj, cookies=cookies)
     # 返回网页内容
     print(x.text)
 
