@@ -9,7 +9,7 @@ if __name__ == '__main__':
     mail163Server = "smtp.163.com"
     mailPort = 25
     mailUserName = "18635572970@163.com"
-    mailPasswd = "MMDMTETFGIFHMWHK"
+    mailPasswd = ""
 
     msg = MIMEMultipart()
     msg["Subject"] = "带有附件的邮件"
