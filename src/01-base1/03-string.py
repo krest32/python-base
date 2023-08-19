@@ -9,4 +9,5 @@ if __name__ == '__main__':
     print(str[2:5])  # 输出从第三个开始到第五个的字符
     print(str[2:])  # 输出从第三个开始的后的所有字符
     print(str * 2)  # 输出字符串两次，也可以写成 print (2 * str)
+    print(str * 10) # 将一个字符串重复打印多次，
     print(str + "TEST")  # 连接字符串
