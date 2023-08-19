@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import smtplib
+from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -8,7 +9,7 @@ if __name__ == '__main__':
     mail163Server = "smtp.163.com"
     mailPort = 25
     mailUserName = "18635572970@163.com"
-    mailPasswd = ""
+    mailPasswd = "MMDMTETFGIFHMWHK"
 
     msg = MIMEMultipart()
     msg["Subject"] = "带有附件的邮件"
@@ -22,18 +23,12 @@ if __name__ == '__main__':
     '''
     msg.attach(MIMEText(content, 'plain', 'utf-8'))
 
-    # 构造附件1，txt文件
-    att1 = MIMEText('附件内容', 'base64', 'utf-8')
-    att1["Content-Type"] = 'application/octet-stream'
-    # 这里的filename可以任意写，写什么名字，邮件中显示什么名字
-    att1["Content-Disposition"] = 'attachment; filename="test.txt"'
-    msg.attach(att1)
-
-    # # 构造附件2，xlsx文件
-    # att2 = MIMEText('test.txt', 'base64', 'utf-8')
-    # att2["Content-Type"] = 'application/octet-stream'
-    # att2["Content-Disposition"] = 'attachment; filename="test.xlsx"'
-    # msg.attach(att2)
+    # open里输入添加附件文件的绝对路径
+    part = MIMEApplication(open(r'demo.xls', 'rb').read())
+    # 构造附件，filename是编辑附件文件名，可以随便写
+    part.add_header('Content-Disposition', 'attachment', filename='data.xls')
+    # 添加附件
+    msg.attach(part)
 
     ## 发送邮件
     s = smtplib.SMTP()  # 实例化对象
