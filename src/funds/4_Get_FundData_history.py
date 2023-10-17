@@ -16,6 +16,7 @@ def Get_html(fund_code, start_date, end_date, type_="lsjz", page=1, per=20):
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36',
     }
     HTML = requests.get(url, headers=headers)
+    print(url)
     HTML.encoding = "utf-8"
 
     return HTML
@@ -68,7 +69,7 @@ def Get_FundData_main(fund_code, start_date, end_date):
 
 
 if __name__ == "__main__":
-    start_date = "2015-09-15"
+    start_date = "2010-09-15"
     end_date = "2023-10-16"
     # codes = ['320007', '161725', '012723']  # 基金代码列表
     codes = ['320007']  # 基金代码列表
