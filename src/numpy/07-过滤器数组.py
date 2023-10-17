@@ -13,7 +13,7 @@ if __name__ == '__main__':
         else:
             filter_arr.append(False)
 
-    newarr = arr[filter_arr]
+    new_arr = arr[filter_arr]
 
     print(filter_arr)
-    print(newarr)
+    print(new_arr)

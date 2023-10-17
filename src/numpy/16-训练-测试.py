@@ -38,16 +38,16 @@ if __name__ == '__main__':
     # 数据集是什么样的？我认为最合适拟合的是多项式回归，因此让我们画一条多项式回归线。
     # 要通过数据点画一条线，我们使用 matplotlib 模块的 plott() 方法：
     # 实例
-    mymodel = numpy.poly1d(numpy.polyfit(train_x, train_y, 4))
-    myline = numpy.linspace(0, 6, 100)
+    my_model = numpy.poly1d(numpy.polyfit(train_x, train_y, 4))
+    my_line = numpy.linspace(0, 6, 100)
     plt.scatter(train_x, train_y)
-    plt.plot(myline, mymodel(myline))
+    plt.plot(my_line, my_model(my_line))
     plt.show()
 
-    r2 = r2_score(test_y, mymodel(test_x))
+    r2 = r2_score(test_y, my_model(test_x))
     print(r2)
     # 注释：结果 0.809 表明该模型也适合测试集，我们确信可以使用该模型预测未来值。
 
     # 现在我们已经确定我们的模型是不错的，可以开始预测新值了。
     # 如果购买客户在商店中停留 5 分钟，他/她将花费多少钱？
-    print(mymodel(5))
+    print(my_model(5))
