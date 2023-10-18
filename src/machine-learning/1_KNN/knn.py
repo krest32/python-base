@@ -15,17 +15,33 @@ def create_data_set():  # 创建数据集和标签
     return group, labels
 
 
+
+# 欧式距离，平面中两个点之间的直线距离
 def classify(input, data_set, labels, k):
     # 用于分类的输入向量inX，输入的训练样本集dataSet，标签向量labels，k表示用于选择最近邻居的数目
     data_set_size = data_set.shape[0]
     # 数组中一共有多少个点
-    print(data_set_size)
+    # print(data_set_size)
+
     # 距离计算，使用欧式距离公式
     diff_mat = tile(input, (data_set_size, 1)) - data_set
+    # print(diff_mat)
+
+    # 每个字数得到自己的平方值
     aq_diff_mat = diff_mat ** 2
+    # print(aq_diff_mat)
+
+    # 某个维度的数据求和
+    # axis=0 表示沿着行的方向进行计算，
+    # axis=1 表示沿着列的方向进行计算。
+    # 当 axis 为负数时，则从末尾开始计算
     aq_distances = aq_diff_mat.sum(axis=1)
+    # print(aq_distances)
+
     distances = aq_distances ** 0.5
+    # argsort() 函数是对数组中的元素进行从小到大排序，并返回相应序列元素的数组下标。
     sorted_dist = distances.argsort()
+    # print(sorted_dist)
 
     class_count = {}
     for i in range(k):

@@ -6,12 +6,16 @@ if __name__ == '__main__':
     # 低标准偏差表示大多数数字接近均值（平均值）。
     # 高标准偏差表示这些值分布在更宽的范围内。
     speed = [86, 87, 88, 86, 87, 85, 86]
-    x = numpy.std(speed)
-    print(x)
+    x1 = numpy.std(speed)
+    x2 = numpy.var(speed)
+    print(x1)
+    print(x2)
 
     # 方差是另一种数字，指示值的分散程度。
     # 实际上，如果采用方差的平方根，则会得到标准差！
     # 或反之，如果将标准偏差乘以自身，则会得到方差！
     speed2 = [32, 111, 138, 28, 59, 77, 97]
-    x2 = numpy.var(speed2)
-    print(x2)
+    x3 = numpy.std(speed2)
+    x4 = numpy.var(speed2)
+    print(x3)
+    print(x4)

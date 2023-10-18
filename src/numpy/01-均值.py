@@ -1,5 +1,5 @@
+import statistics
 import numpy
-import stats
 
 if __name__ == '__main__':
     # 平均值
@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
 
     # 众数：出现次数最多的数字
-    x = stats.mode(speed)
+    x = statistics.mode(speed)
     print(x)
 
 
