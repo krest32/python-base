@@ -8,11 +8,10 @@ import numpy as np
 # ndarray.flags	ndarray 对象的内存信息
 # ndarray.real	ndarray元素的实部
 # ndarray.imag	ndarray 元素的虚部
-# ndarray.data	包含实际数组元素的缓冲区，由于一般通过数组的索引获取元素，所以通常不需要使用这个属性。
+# ndarray.data	包含实际数组元素的缓冲区，由于一般通过数组的索引获取元素，所以通常不需要使用这个属性
 
-if __name__ == '__main__':
-    a1 = np.arange(24)
-    print(a1.ndim)  # a 现只有一个维度
-    # 现在调整其大小
-    b1 = a1.reshape(2, 4, 3)  # b 现在拥有三个维度
-    print(b1.ndim)
+a = np.arange(24)
+print(a.ndim)  # a 现只有一个维度
+# 现在调整其大小
+b = a.reshape(2, 4, 3)  # b 现在拥有三个维度
+print(b.ndim)
