@@ -12,7 +12,7 @@ Select类方法：
 、为什么单独使用下拉框？
 1)、如果option选项没有value值的化，css定位或其他定位就不太方便。
 2、使用Select类
-1）、导包：from selenium.webdriver.support.select improt Select
+1）、导包：from 11-selenium.webdriver.support.select improt Select
 2）、实例化下拉框：s = Select(element)
 3）、调用方法：s.select_by_index()索引从0开始
 3、Select类提供的方法
