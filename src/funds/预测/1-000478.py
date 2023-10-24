@@ -86,6 +86,11 @@ def un_linear_regression(x, y, degree):
 def test_func(clf, x):
     return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
             x ** 3) + clf.coef_[0, 4] * (x ** 4) + clf.coef_[0, 4] * (x ** 5) + clf.coef_[0, 6] * (x ** 6)
+    # return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
+    #            x ** 3) + clf.coef_[0, 4] * (x ** 4)
+    # return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
+    #         x ** 3) + clf.coef_[0, 4] * (x ** 4) + clf.coef_[0, 4] * (x ** 5)
+    # return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (x ** 3)
 
 
 if __name__ == "__main__":

@@ -57,6 +57,6 @@ if __name__ == '__main__':
     plt.scatter(x, y, label="数据")
     plt.legend()
     plt.show()
-    print(test_func(clf2, 35))
+    print(test_func(clf2, 30))
 
 
