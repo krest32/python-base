@@ -1,10 +1,9 @@
-import numpy.matlib
 import numpy as np
 
 print(np.matlib.empty((2, 2)))
 # 填充为随机数据
 
-print (np.matlib.zeros((2,2)))
+print (np.zeros((2,2)))
 
 
 print (np.matlib.ones((2,2)))

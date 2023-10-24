@@ -13,3 +13,8 @@ df = pd.DataFrame(data)
 print(df.loc[0])
 # 返回第二行
 print(df.loc[1])
+
+# 返回第一列
+print(df.iloc[:, [0]])
+# 返回第二列
+print(df.iloc[:, [1]])
