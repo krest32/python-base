@@ -38,8 +38,9 @@ for i in range(len(degrees)):
                          ("linear_regression", linear_regression)])
     # x 转换为 二维数组， 输入训练集
     pipeline.fit(X[:, np.newaxis], y)
-    scores = cross_val_score(pipeline, X[:, np.newaxis], y, scoring="neg_mean_squared_error", cv=10)
     # 使用交叉验证，第一个参数为模型，第二个为输入，第三个为标签，第四个为误差计算方式，第五个为多少折
+    scores = cross_val_score(pipeline, X[:, np.newaxis], y, scoring="neg_mean_squared_error", cv=10)
+
     X_test = np.linspace(0, 1, 100)
     # 预测数据
     plt.plot(X_test, pipeline.predict(X_test[:, np.newaxis]), label="Model")
