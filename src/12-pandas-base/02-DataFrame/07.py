@@ -8,4 +8,5 @@ data = {
 df = pd.DataFrame(data, index=["day1", "day2", "day3"])
 
 # 指定返回索引
+print(df)
 print(df.loc["day2"])

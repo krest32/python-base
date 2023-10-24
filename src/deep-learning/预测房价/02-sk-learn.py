@@ -3,6 +3,8 @@ import matplotlib
 from matplotlib import pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
+plt.rcParams["font.sans-serif"] = ["SimHei"]
+plt.rcParams["axes.unicode_minus"] = False
 
 
 # 创建虚拟数据
@@ -33,6 +35,9 @@ def un_linear_regression(x, y):
     clf2 = LinearRegression()
     clf2.fit(x_p, y)
     return clf2, x_p
+# 手寫非线性回归方程 3阶泰勒展开
+def test_func(clf2, x):
+    return clf2.intercept_[0] + clf2.coef_[0, 1] * (x ** 1) + clf2.coef_[0, 2] * (x ** 2) + clf2.coef_[0, 3] * (x ** 3)
 
 
 if __name__ == '__main__':
@@ -52,8 +57,6 @@ if __name__ == '__main__':
     plt.scatter(x, y, label="数据")
     plt.legend()
     plt.show()
+    print(test_func(clf2, 35))
 
 
-# 手寫非线性回归方程 3阶泰勒展开
-def f(x):
-    return clf2.intercept_[0] + clf2.coef_[0, 1] * (x ** 1) + clf2.coef_[0, 2] * (x ** 2) + clf2.coef_[0, 3] * (x ** 3)

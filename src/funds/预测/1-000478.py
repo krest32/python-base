@@ -1,9 +1,14 @@
 import re
-import json
+import matplotlib.pyplot as plt
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
-from functools import partial
+import numpy as np
+
+plt.rcParams["font.sans-serif"] = ["SimHei"]
+plt.rcParams["axes.unicode_minus"] = False
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
 
 def Get_html(fund_code, start_date, end_date, type_="lsjz", page=1, per=20):
@@ -68,12 +73,49 @@ def Get_FundData_main(fund_code, start_date, end_date):
     return res_df
 
 
-if __name__ == "__main__":
-    start_date = "2010-09-15"
-    end_date = "2023-10-16"
-    # codes = ['320007', '161725', '012723']  # 基金代码列表
-    codes = ['320007']  # 基金代码列表
-    fund_df = pd.concat(
-        list(map(partial(Get_FundData_main, start_date=start_date, end_date=end_date), codes)))  # 结合map方法获取多基金数据
+def un_linear_regression(x, y, degree):
+    # 非线性回归
+    # 根据degree的值转换为相应的多项式（非线性回归），也就是几级的 泰勒多项式
+    ploy_feat = PolynomialFeatures(degree)
+    x_p = ploy_feat.fit_transform(x)
+    clf = LinearRegression()
+    clf.fit(x_p, y)
+    return clf, x_p
 
-    print(fund_df)
+
+def test_func(clf, x):
+    return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
+            x ** 3) + clf.coef_[0, 4] * (x ** 4) + clf.coef_[0, 4] * (x ** 5) + clf.coef_[0, 6] * (x ** 6)
+
+
+if __name__ == "__main__":
+    # start_date = "2010-01-15"
+    # end_date = "2023-10-16"
+    # # codes = ['320007', '161725', '012723']  # 基金代码列表
+    # # 建信 500 指数强
+    # codes = ['000478']  # 基金代码列表
+    # fund_df = pd.concat(
+    #     list(map(partial(Get_FundData_main, start_date=start_date, end_date=end_date), codes)))  # 结合map方法获取多基金数据
+    # print(fund_df)
+    # ans_df = fund_df.sort_values('净值日期', ascending=True)
+    # ans_df.to_csv('000478.csv')
+    #
+    # x_val = fund_df.loc[:, '净值日期']
+
+    and_df = pd.read_csv('000478.csv')
+    # 添加序号
+    and_df.rename(columns={'index': '序号'}, inplace=True)
+    and_df['序号'] = range(1, len(and_df) + 1)
+
+    x = and_df.loc[:, '序号']
+    y = and_df.loc[:, '单位净值']
+    x = x.values.reshape(len(and_df), 1)
+    y = y.values.reshape(len(and_df), 1)
+    clf2, x_p = un_linear_regression(x, y, 6)
+
+    plt.plot(x, y, label="实际数据")
+    plt.plot(x, clf2.predict(x_p), label="非线性回归")
+
+    print(test_func(clf2, 2344))
+    plt.legend()
+    plt.show()
