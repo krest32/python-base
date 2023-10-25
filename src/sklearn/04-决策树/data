@@ -1,0 +1,16 @@
+[0 1 2]
+['setosa' 'versicolor' 'virginica']
+{0: 'setosa', 1: 'versicolor', 2: 'virginica'}
+|--- feature_2 <= 2.45
+|   |--- class: setosa
+|--- feature_2 >  2.45
+|   |--- feature_3 <= 1.75
+|   |   |--- feature_2 <= 5.35
+|   |   |   |--- class: versicolor
+|   |   |--- feature_2 >  5.35
+|   |   |   |--- class: virginica
+|   |--- feature_3 >  1.75
+|   |   |--- feature_2 <= 4.85
+|   |   |   |--- class: virginica
+|   |   |--- feature_2 >  4.85
+|   |   |   |--- class: virginica

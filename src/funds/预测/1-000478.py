@@ -4,11 +4,13 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 import numpy as np
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score  # 交叉验证
 
 
 def Get_html(fund_code, start_date, end_date, type_="lsjz", page=1, per=20):
@@ -83,16 +85,6 @@ def un_linear_regression(x, y, degree):
     return clf, x_p
 
 
-def test_func(clf, x):
-    return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
-            x ** 3) + clf.coef_[0, 4] * (x ** 4) + clf.coef_[0, 4] * (x ** 5) + clf.coef_[0, 6] * (x ** 6)
-    # return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
-    #            x ** 3) + clf.coef_[0, 4] * (x ** 4)
-    # return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (
-    #         x ** 3) + clf.coef_[0, 4] * (x ** 4) + clf.coef_[0, 4] * (x ** 5)
-    # return clf.intercept_[0] + clf.coef_[0, 1] * (x ** 1) + clf.coef_[0, 2] * (x ** 2) + clf.coef_[0, 3] * (x ** 3)
-
-
 if __name__ == "__main__":
     # start_date = "2010-01-15"
     # end_date = "2023-10-16"
@@ -116,11 +108,21 @@ if __name__ == "__main__":
     y = and_df.loc[:, '单位净值']
     x = x.values.reshape(len(and_df), 1)
     y = y.values.reshape(len(and_df), 1)
-    clf2, x_p = un_linear_regression(x, y, 6)
 
     plt.plot(x, y, label="实际数据")
-    plt.plot(x, clf2.predict(x_p), label="非线性回归")
+    clf2, x_p = un_linear_regression(x, y, 6)
+    plt.plot(x, clf2.predict(x_p), label="非线性回归-")
 
-    print(test_func(clf2, 2344))
+    polynomial_features = PolynomialFeatures(6, include_bias=False)
+    # 线性回归
+    linear_regression = LinearRegression()
+    # 使用pipline串联模型
+    pipeline = Pipeline([("polynomial_features", polynomial_features), ("linear_regression", linear_regression)])
+    pipeline.fit(x, y)
+    # 进行交叉验证
+    scores = cross_val_score(pipeline, x, y, scoring="neg_mean_squared_error", cv=100)
+    x_test = np.linspace(0, 2700, 2700)
+    plt.plot(x_test, pipeline.predict(x_test[:, np.newaxis]), label='predict')
+
     plt.legend()
     plt.show()

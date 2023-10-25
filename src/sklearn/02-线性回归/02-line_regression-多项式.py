@@ -11,7 +11,7 @@ def true_fun(X):
     return np.cos(1.5 * np.pi * X)
 
 
-# 模拟样本数据
+# 模拟样本数据 (0~1)之间，一共30个样本
 np.random.seed(0)
 n_samples = 30
 
@@ -24,6 +24,8 @@ y = true_fun(X) + np.random.randn(n_samples) * 0.1
 degrees = [1, 4, 15]
 plt.figure(figsize=(14, 5))
 
+
+# 这个公式只能够拟合一部分的曲线
 for i in range(len(degrees)):
     # 总共三个图，获取第i+1个图的图像柄
     ax = plt.subplot(1, len(degrees), i + 1)
@@ -41,7 +43,7 @@ for i in range(len(degrees)):
     # 使用交叉验证，第一个参数为模型，第二个为输入，第三个为标签，第四个为误差计算方式，第五个为多少折
     scores = cross_val_score(pipeline, X[:, np.newaxis], y, scoring="neg_mean_squared_error", cv=10)
 
-    X_test = np.linspace(0, 1, 100)
+    X_test = np.linspace(0, 10, 1000)
     # 预测数据
     plt.plot(X_test, pipeline.predict(X_test[:, np.newaxis]), label="Model")
     # 真实数据
@@ -50,9 +52,11 @@ for i in range(len(degrees)):
     plt.scatter(X, y, edgecolor='b', s=20, label="Samples")
     plt.xlabel("x")
     plt.ylabel("y")
-    plt.xlim((0, 1))
+    plt.xlim((0, 2))
     plt.ylim((-2, 2))
     plt.legend(loc="best")
     plt.title("Degree {}\nMSE = {:.2e}(+/- {:.2e})".format(degrees[i], -scores.mean(), scores.std()))
 
 plt.show()
+
+

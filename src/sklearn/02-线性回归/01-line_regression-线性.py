@@ -31,7 +31,7 @@ print("输出参数b：", model.intercept_)
 x_test = np.linspace(0, 1, 100)
 # 将拟合出来的散点画出
 plt.plot(x_test, model.predict(x_test[:, np.newaxis]), label="Model")
-plt.plot(x_test, true_fun(x_test), label="True function")  # 真实结果
+# plt.plot(x_test, true_fun(x_test), label="True function")  # 真实结果
 # 画出训练集的点
 plt.scatter(x_train, y_train)
 plt.legend(loc="best")  # 将标签放在最合适的位置
