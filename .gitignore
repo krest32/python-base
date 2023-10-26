@@ -30,4 +30,4 @@ nohup.out
 .project
 *.iws
 *.exe
-/src/tensorflow-practise/temp/
+/src/tensorflow-practice/temp/

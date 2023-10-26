@@ -16,6 +16,7 @@ def load2():
     clf.fit(digits.data[:-1], digits.target[:-1])
     print(clf.predict(digits.data[-1:]))
 
+
 if __name__ == '__main__':
     load1()
     load2()
