@@ -19,20 +19,6 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 import torch
 import torchkeras
 
-"""
-数据字段说明：
-    Survived:0代表死亡，1代表存活【y标签】
-    Pclass:乘客所持票类，有三种值(1,2,3) 【转换成onehot编码】
-    Name:乘客姓名 【舍去】
-    Sex:乘客性别 【转换成bool特征】
-    Age:乘客年龄(有缺失) 【数值特征，添加“年龄是否缺失”作为辅助特征】
-    SibSp:乘客兄弟姐妹/配偶的个数(整数值) 【数值特征】
-    Parch:乘客父母/孩子的个数(整数值)【数值特征】
-    Ticket:票号(字符串)【舍去】
-    Fare:乘客所持票的价格(浮点数，0-500不等) 【数值特征】
-    Cabin:乘客所在船舱(有缺失) 【添加“所在船舱是否缺失”作为辅助特征】
-    Embarked:乘客登船港口:S、C、Q(有缺失)【转换成onehot编码，四维度 S,C,Q,nan】
-"""
 
 
 def load_data():
@@ -295,6 +281,21 @@ def plot_metric(dfhistory, metric):
 if __name__ == '__main__':
     print("torch.__version__ = ", torch.__version__)
     print("torchkeras.__version__ = ", torchkeras.__version__)
+
+    """
+    数据字段说明：
+        Survived:0代表死亡，1代表存活【y标签】
+        Pclass:乘客所持票类，有三种值(1,2,3) 【转换成onehot编码】
+        Name:乘客姓名 【舍去】
+        Sex:乘客性别 【转换成bool特征】
+        Age:乘客年龄(有缺失) 【数值特征，添加“年龄是否缺失”作为辅助特征】
+        SibSp:乘客兄弟姐妹/配偶的个数(整数值) 【数值特征】
+        Parch:乘客父母/孩子的个数(整数值)【数值特征】
+        Ticket:票号(字符串)【舍去】
+        Fare:乘客所持票的价格(浮点数，0-500不等) 【数值特征】
+        Cabin:乘客所在船舱(有缺失) 【添加“所在船舱是否缺失”作为辅助特征】
+        Embarked:乘客登船港口:S、C、Q(有缺失)【转换成onehot编码，四维度 S,C,Q,nan】
+    """
 
     # 准备数据
     dftrain_raw, dftest_raw = load_data()
