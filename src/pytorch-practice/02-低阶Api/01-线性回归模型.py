@@ -1,6 +1,28 @@
 import torch
 from matplotlib import pyplot as plt
 
+
+# 同时做了两个线性回归
+def show_data(x_data, y_data):
+    # 设置显示图形的大小
+    plt.figure(figsize=(18, 7))
+
+    # 第一个图像
+    ax1 = plt.subplot(121)
+    ax1.scatter(x_data[:, 0].numpy(), y_data[:, 0].numpy(), c="b", label="samples")
+    ax1.legend()
+    plt.xlabel("x1")
+    plt.ylabel("y", rotation=0)
+
+    # 第二个图像
+    ax2 = plt.subplot(122)
+    ax2.scatter(x_data[:, 1].numpy(), y_data[:, 0].numpy(), c="g", label="samples")
+    ax2.legend()
+    plt.xlabel("x2")
+    plt.ylabel("y", rotation=0)
+    plt.show()
+
+
 if __name__ == '__main__':
     n = 400
     # 生成 n * 2 的矩阵数组，其中每个数字 * 10, 然后 - 5
@@ -26,20 +48,4 @@ if __name__ == '__main__':
     y_data = x_data @ w0 + b0 + torch.normal(0.0, 2.0, size=[n, 1])
     print(y_data.shape)
 
-    # 设置显示图形的大小
-    plt.figure(figsize=(18, 7))
-
-    # 第一个图像
-    ax1 = plt.subplot(121)
-    ax1.scatter(x_data[:, 0].numpy(), y_data[:, 0].numpy(), c="b", label="samples")
-    ax1.legend()
-    plt.xlabel("x1")
-    plt.ylabel("y", rotation=0)
-
-    # 第二个图像
-    ax2 = plt.subplot(122)
-    ax2.scatter(x_data[:, 1].numpy(), y_data[:, 0].numpy(), c="g", label="samples")
-    ax2.legend()
-    plt.xlabel("x2")
-    plt.ylabel("y", rotation=0)
-    plt.show()
+    show_data(x_data, y_data)
